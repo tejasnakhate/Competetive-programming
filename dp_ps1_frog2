@@ -1,0 +1,26 @@
+#include <iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+int frog(int n,int k, vector<int> v){
+    vector<int> dp(n+1,0);
+    dp[1]=0;
+    for(int i=2; i<=n; i++){
+        int a=INT_MAX;
+        for(int j=i-1; j>=1 and abs(i-j)<=k; j--){
+            a=min(a,abs(v[i]-v[j])+dp[j]);
+        }
+        dp[i]=a;
+    }
+    return dp[n];
+}
+
+int main(){
+    int n,k;
+    cin>>n>>k;
+    vector<int> v(n+1);
+    for(int i=1; i<=n; i++){
+        cin>>v[i];
+    }
+    cout<<frog(n,k,v);
+}
